@@ -1,0 +1,19 @@
+site_name: PartEmitter Documentation
+nav:
+  - About: index.md
+  - API Reference:
+    - PartEmitter: api-reference/PartEmitter.md
+    - Particle: api-reference/Particle.md
+    - Utils: api-reference/Utils.md
+
+theme:
+  name: material
+  palette:
+    primary: 'indigo'
+    accent: 'indigo'
+    scheme: preference
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
