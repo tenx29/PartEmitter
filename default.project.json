@@ -1,0 +1,11 @@
+{
+  "name": "Physical Particle System",
+  "tree": {
+    "$className": "DataModel",
+    "ServerScriptService": {
+      "Server": {
+        "$path": "src"
+      }
+    }
+  }
+}
