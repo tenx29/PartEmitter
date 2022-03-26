@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://tenx29.github.io/PartEmitter/</loc>
+         <lastmod>2022-03-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://tenx29.github.io/PartEmitter/api-reference/PartEmitter/</loc>
+         <lastmod>2022-03-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://tenx29.github.io/PartEmitter/api-reference/Particle/</loc>
+         <lastmod>2022-03-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://tenx29.github.io/PartEmitter/api-reference/Utils/</loc>
+         <lastmod>2022-03-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+</urlset>
