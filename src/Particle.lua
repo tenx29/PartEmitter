@@ -68,6 +68,7 @@ function Particle.new(ParticleProperties: {}, PhysicalProperties: {}, Position: 
     self.Part.Parent = Parent
 
     self.Velocity = Velocity
+    self.Acceleration = ParticleProperties.Acceleration
 
     -- Simulate the particle
     self.CreationTime = tick()
