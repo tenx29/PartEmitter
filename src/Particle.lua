@@ -2,7 +2,9 @@ local HttpService = game:GetService("HttpService")
 local PhysicsService = game:GetService("PhysicsService")
 local RunService = game:GetService("RunService")
 local Utils = require(script.Parent.Utils)
+
 local Random = Random.new()
+
 local Particle = {}
 Particle.__index = Particle
 
@@ -21,16 +23,12 @@ function Particle.new(ParticleProperties: {}, PhysicalProperties: {}, Position: 
     }
     self.Destroying = self.__events.Destroying.Event
 
-    -- Parse NumberSequence envelopes.
-    ParticleProperties.Size = Utils.parseNSEnvelopes(ParticleProperties.Size)
-    ParticleProperties.Squash = Utils.parseNSEnvelopes(ParticleProperties.Squash)
-    ParticleProperties.Transparency = Utils.parseNSEnvelopes(ParticleProperties.Transparency)
-
     -- Create the ParticleEmitter used to show the particle and apply the given properties.
     self.ParticleEmitter = Instance.new("ParticleEmitter")
     for name, value in pairs(ParticleProperties) do
         if name == "Lifetime" then  -- Decide the particle's lifetime at this point
             value = Random:NextNumber(value.Min, value.Max)
+            value = NumberRange.new(value)
         end
         self[name] = value
         self.ParticleEmitter[name] = value
@@ -38,9 +36,10 @@ function Particle.new(ParticleProperties: {}, PhysicalProperties: {}, Position: 
 
     -- Set some properties of the emitter to values that should not be changed.
     self.ParticleEmitter.Enabled = false
-    self.ParticleEmitter.Speed = 0
+    self.ParticleEmitter.Speed = NumberRange.new(0)
     self.ParticleEmitter.Acceleration = Vector3.new(0,0,0)
     self.ParticleEmitter.LockedToPart = true
+    self.ParticleEmitter.Shape = Enum.ParticleEmitterShape.Box
     
     -- Create a Part that acts as the collision box for the particle
     self.Part = Instance.new("Part")
@@ -53,6 +52,9 @@ function Particle.new(ParticleProperties: {}, PhysicalProperties: {}, Position: 
     self.Part.CanTouch = PhysicalProperties.CanTouch
     self.Part.CanQuery = PhysicalProperties.CanQuery
     self.Part.Anchored = not IsRigidBody
+
+    -- Add an easier way to detect when the Part is touched
+    self.Touched = self.Part.Touched
 
     -- Set the Part's collision group if it exists
     if PhysicalProperties.CollisionGroup then
@@ -75,13 +77,18 @@ function Particle.new(ParticleProperties: {}, PhysicalProperties: {}, Position: 
     end
     self.HeartbeatConnection = RunService.Heartbeat:Connect(function(deltaTime)
         local age = tick()-self.CreationTime
-        self.Part.Size = Utils.evalNS(self.Size, age/self.Lifetime)
+        self.Part.Size = Vector3.new(1,1,1) * Utils.evalNS(self.Size, age/self.Lifetime.Min)     -- Lifetime is a NumberRange with two identical values at this point, so it doesn't matter if we use Min or Max.
         if not IsRigidBody then
             -- Move the part in the direction of Velocity and make it look in the direction it's going, then apply Acceleration
-            self.Part.CFrame = CFrame.new(self.Part.Position + self.Velocity*deltaTime, self.Part.Position + self.Velocity*deltaTime*2)
+            local lookingAt = self.Part.Position + self.Velocity*deltaTime*2
+            if self.Velocity.Magnitude == 0 then
+                self.Part.CFrame = CFrame.new(self.Part.Position + self.Velocity*deltaTime)
+            else
+                self.Part.CFrame = CFrame.new(self.Part.Position + self.Velocity*deltaTime, lookingAt)
+            end
             self.Velocity += deltaTime*self.Acceleration
         end
-        if age >= self.Lifetime then
+        if age >= self.Lifetime.Min then
             self:Destroy()
         end
     end)
@@ -100,7 +107,7 @@ function Particle:Destroy()
     self.ParticleEmitter:Destroy()
     self.Attachment:Destroy()
     self.Part:Destroy()
-    self = nil
+    setmetatable(self, nil)
 end
 
 return Particle
