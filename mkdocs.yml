@@ -1,4 +1,8 @@
 site_name: PartEmitter Documentation
+site_url: https://tenx29.github.io/PartEmitter/
+repo_name: tenx29/PartEmitter
+repo_url: https://github.com/tenx29/PartEmitter
+
 nav:
   - About: index.md
   - API Reference:
