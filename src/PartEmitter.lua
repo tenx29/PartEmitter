@@ -8,8 +8,6 @@ local random = Random.new()
 local Emitter = {}
 Emitter.__index = Emitter
 
--- Store all existing emitters in a table in case the user needs to access all emitters at once
-local Emitters = {}
 
 -- Dictionary of default values for a particle emitter, also used for easily iterating over ParticleEmitter properties
 local EmitterDefaultProperties = {
@@ -99,7 +97,6 @@ function Emitter.new()
         end
     end)
 
-    Emitters[self.UUID] = self
     return self
 end
 
@@ -183,6 +180,7 @@ function Emitter:Emit(EmissionCount: number?)
 
         local particle = Particle.new(ParticleProperties, PhysicalProperties, emissionPoint, velocity, self.IsRigidBody, self.ParticleContainer or self.Parent)
         table.insert(self.Particles, particle)
+        self.__events.ParticleAdded:Fire(particle)
         particle.Destroying:Connect(function()
             self.__events.ParticleRemoving:Fire(particle)
         end)
@@ -202,7 +200,6 @@ end
 function Emitter:Destroy()
     self:Clear()
     self.__events.Destroying:Fire()
-    Emitters[self.UUID] = nil
     setmetatable(self, nil)
 end
 
