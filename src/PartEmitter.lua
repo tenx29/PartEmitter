@@ -179,10 +179,11 @@ function Emitter:Emit(EmissionCount: number?)
         end
 
         local particle = Particle.new(ParticleProperties, PhysicalProperties, emissionPoint, velocity, self.IsRigidBody, self.ParticleContainer or self.Parent)
-        table.insert(self.Particles, particle)
+        self.Particles[particle.UUID] = particle
         self.__events.ParticleAdded:Fire(particle)
         particle.Destroying:Connect(function()
             self.__events.ParticleRemoving:Fire(particle)
+            self.Particles[particle.UUID] = nil
         end)
     end
 end
@@ -201,6 +202,7 @@ function Emitter:Destroy()
     self:Clear()
     self.__events.Destroying:Fire()
     setmetatable(self, nil)
+    self = nil
 end
 
 return Emitter

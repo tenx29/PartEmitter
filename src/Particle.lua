@@ -108,7 +108,11 @@ function Particle:Destroy()
     self.ParticleEmitter:Destroy()
     self.Attachment:Destroy()
     self.Part:Destroy()
+    for _, event in pairs(self.__events) do
+        event:Destroy()
+    end
     setmetatable(self, nil)
+    self = nil
 end
 
 return Particle
