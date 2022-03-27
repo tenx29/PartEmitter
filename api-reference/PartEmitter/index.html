@@ -544,22 +544,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#boolean-cancollide" class="md-nav__link">
-    boolean CanCollide
+  <a href="#boolean-cancollide-false" class="md-nav__link">
+    boolean CanCollide = false
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#boolean-cantouch" class="md-nav__link">
-    boolean CanTouch
+  <a href="#boolean-cantouch-false" class="md-nav__link">
+    boolean CanTouch = false
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#boolean-canquery" class="md-nav__link">
-    boolean CanQuery
+  <a href="#boolean-canquery-false" class="md-nav__link">
+    boolean CanQuery = false
   </a>
   
 </li>
@@ -978,22 +978,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#boolean-cancollide" class="md-nav__link">
-    boolean CanCollide
+  <a href="#boolean-cancollide-false" class="md-nav__link">
+    boolean CanCollide = false
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#boolean-cantouch" class="md-nav__link">
-    boolean CanTouch
+  <a href="#boolean-cantouch-false" class="md-nav__link">
+    boolean CanTouch = false
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#boolean-canquery" class="md-nav__link">
-    boolean CanQuery
+  <a href="#boolean-canquery-false" class="md-nav__link">
+    boolean CanQuery = false
   </a>
   
 </li>
@@ -1121,8 +1121,12 @@
 <h3 id="boolean-isrigidbody-false"><a href="https://developer.roblox.com/en-us/articles/Boolean">boolean</a> IsRigidBody <em><span style="color: grey">= false</span></em></h3>
 <p>If true, particles emitted will act like regular unanchored BaseParts.</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<p class="admonition-title">Overrides property</p>
 <p>This property overrides the <strong><a href="#vector3-acceleration">Acceleration</a></strong> property.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Emitting a large number of rigid body particles may severely affect performance.</p>
 </div>
 <hr />
 <h3 id="string-collisiongroup"><a href="https://developer.roblox.com/en-us/articles/String">string</a> CollisionGroup</h3>
@@ -1149,7 +1153,7 @@
 <p>Time when the latest Particle was emitted.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Manually emitting Particles by calling PartEmitter:Emit() will not update this value.</p>
+<p>Manually emitting Particles by calling <strong><a href="#void-emitinteger-emitcount-1">PartEmitter:Emit()</a></strong> will not update this value.</p>
 </div>
 <hr />
 <h3 id="rbxscriptconnection-heartbeatconnection"><a href="https://developer.roblox.com/en-us/api-reference/datatype/RBXScriptConnection">RBXScriptConnection</a> HeartbeatConnection</h3>
@@ -1192,13 +1196,13 @@
 <hr />
 <h3 id="inherited-from-basepart">Inherited from <a href="https://developer.roblox.com/en-us/api-reference/class/BasePart">BasePart</a>:</h3>
 <h4 id="parttype-parttype"><a href="https://developer.roblox.com/en-us/api-reference/enum/PartType">PartType</a> PartType</h4>
-<h4 id="boolean-cancollide"><a href="https://developer.roblox.com/en-us/articles/Boolean">boolean</a> CanCollide</h4>
+<h4 id="boolean-cancollide-false"><a href="https://developer.roblox.com/en-us/articles/Boolean">boolean</a> CanCollide <em><span style="color: grey">= false</span></em></h4>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>If <strong><a href="#boolean-isrigidbody-false">IsRigidBody</a></strong> is false, Particles can still move through solid objects.</p>
+<p>If <strong><a href="#boolean-isrigidbody-false">IsRigidBody</a></strong> is false, Particles can still move through solid objects even with CanCollide enabled.</p>
 </div>
-<h4 id="boolean-cantouch"><a href="https://developer.roblox.com/en-us/articles/Boolean">boolean</a> CanTouch</h4>
-<h4 id="boolean-canquery"><a href="https://developer.roblox.com/en-us/articles/Boolean">boolean</a> CanQuery</h4>
+<h4 id="boolean-cantouch-false"><a href="https://developer.roblox.com/en-us/articles/Boolean">boolean</a> CanTouch <em><span style="color: grey">= false</span></em></h4>
+<h4 id="boolean-canquery-false"><a href="https://developer.roblox.com/en-us/articles/Boolean">boolean</a> CanQuery <em><span style="color: grey">= false</span></em></h4>
 <p><br><br></p>
 <h2 id="methods">Methods</h2>
 <hr />
