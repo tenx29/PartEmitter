@@ -89,7 +89,7 @@ function Emitter.new()
     self.LastEmission = tick()
     self.HeartbeatConnection = RunService.Heartbeat:Connect(function(deltaTime)
         if self.Enabled and tick()-self.LastEmission >= 1/self.Rate then
-            local emitCount = math.floor(self.Rate/(tick()-self.LastEmission))
+            local emitCount = math.floor(self.Rate*(tick()-self.LastEmission))
             if math.min(emitCount, self.MaxEmissionsPerHeartbeat) > 0 then
                 self:Emit(math.min(emitCount, self.MaxEmissionsPerHeartbeat))
                 self.LastEmission = tick()
